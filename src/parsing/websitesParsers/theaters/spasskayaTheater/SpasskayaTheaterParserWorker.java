@@ -25,7 +25,7 @@ public class SpasskayaTheaterParserWorker extends ParserWorker<ParserGUI, Show> 
     protected NestingLevel getFirstLvl() throws IOException {
         Elements elems = loader.getBaseSource().getElementsByClass("page_box").get(0)
                 .getElementsByTag("table").get(0).getElementsByTag("tr");
-        elems.remove(0);
+        elems.removeIf(elem -> elem.getElementsByTag("td").size() < 2);
         return new ShowLevel(parserSettings.getStartPoint(), parserSettings.getEndPoint(), elems);
     }
 
